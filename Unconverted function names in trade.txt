@@ -1,0 +1,27 @@
+CheckAccessToOfficesForDeal()
+Load_Totals()
+Insert_AgtFee_Line()
+Set_Agt_Fee_Levels()	//found
+GetFeePeriod()	//found
+getFla()
+getdate()
+GetYTD()
+
+
+Liab in Finan Tab.
+AsideSection : offices and its percentages.
+
+
+Converted Internal called functions
+GetAgtIncSTandGST : Done
+
+
+
+SellingPrice_Label
+SellingPercentage_Label
+ListingPercentage_Label
+AR_Amount_Label
+
+
+
+
