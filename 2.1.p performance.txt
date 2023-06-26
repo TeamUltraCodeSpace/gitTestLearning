@@ -1,0 +1,44 @@
+if (tnEmpl_id != 0)
+                {
+                    if (kit.Common.InList(_gv.gcCountry, "CA", "US") && lStaff == false)//Calculate the Income From T4As OR 1099
+                    {
+                        res = Calculate_Agts_1099_T4A_Income(tdStart, tdEnd, tnEmpl_id, tlAllowDeduction, "", false, true);
+                        response.nIncomeEarned = res.nGross;
+                    }
+                    if (_gv.gcCountry == "CA" && lStaff == true)//Calculate the Income From T4
+                    {
+                        res2 = Calculate_Agts_T4_Income(tdStart, tdEnd, tnEmpl_id, tlAllowDeduction);
+                        response.csrAgts = res2.csrAgts;
+                        response.nIncomeEarned = response.csrAgts.Rows.Count > 0 ? Convert.ToDecimal(response.csrAgts.Rows[0]["Income"]) : 0;
+                    }
+                    if (_gv.gcCountry == "US" && lStaff == true)//Calculate the Income From W2
+                    {
+                        res3 = Calculate_Agts_W2_Income(tdStart, tdEnd, tnEmpl_id, tlAllowDeduction);
+                        response.nIncomeEarned = res.nGross;
+                    }
+                }
+
+
+1st Part
+============
+DataTable lwempinf = _database.SqlView($"select * from lwempinf where clientid = {_database.ClientId}", true);
+DataTable lwpayhis = _database.SqlView($"select * from lwpayhis where clientid = {_database.ClientId}", true);
+DataTable lwchqs = _database.SqlView($"select * from lwchqs where clientid = {_database.ClientId}", true);
+DataTable lwfeehis = _database.SqlView($"select * from lwfeehis where clientid = {_database.ClientId}", true);
+DataTable lw1099mi = _database.SqlView($"select * from lw1099mi where clientid = {_database.ClientId}", true);
+
+
+2nd Part
+============
+DataTable LwFee = _database.SqlView($"select *from LwFee");
+DataTable lwpayhis = _database.SqlView($"select *from lwpayhis");
+DataTable lwfeehis = _database.SqlView($"select *from lwfeehis");
+DataTable lwpayfee = _database.SqlView($"select * from lwpayfee");
+
+
+3rd Part
+============
+DataTable LwPayFee = _database.SqlView("select * from LwPayFee");
+DataTable lwpayhis = _database.SqlView("select * from lwpayhis");
+DataTable lwchqs = _database.SqlView("select * from lwchqs");
+DataTable lwfeehis = _database.SqlView("select * from lwfeehis");
